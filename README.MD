@@ -2,7 +2,7 @@
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/vmosoti/bongatech-sms.svg?style=flat-square)](https://packagist.org/packages/vmosoti/bongatech-sms)
 [![Build Status](https://img.shields.io/travis/vmosoti/bongatech-sms/master.svg?style=flat-square)](https://travis-ci.org/spatie/:package_name)
-[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/xxxxxxxxx.svg?style=flat-square)](https://insight.sensiolabs.com/projects/xxxxxxxxx)
+[![SensioLabsInsight](https://insight.sensiolabs.com/projects/598f97e6-bb46-4883-ae19-29820926b081/mini.png)](https://insight.sensiolabs.com/projects/598f97e6-bb46-4883-ae19-29820926b081)
 [![Total Downloads](https://img.shields.io/packagist/dt/vmosoti/bongatech-sms.svg?style=flat-square)](https://packagist.org/packages/vmosoti/bongatech-sms)
 
 

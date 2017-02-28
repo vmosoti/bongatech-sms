@@ -1,9 +1,11 @@
 # BongaTech SMS
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/vmosoti/bongatech-sms.svg?style=flat-square)](https://packagist.org/packages/vmosoti/bongatech-sms)
-[![Build Status](https://img.shields.io/travis/vmosoti/bongatech-sms/master.svg?style=flat-square)](https://travis-ci.org/spatie/:package_name)
+[![Latest Stable Version](https://poser.pugx.org/vmosoti/bongatech-sms/v/stable)](https://packagist.org/packages/vmosoti/bongatech-sms)
+[![Latest Unstable Version](https://poser.pugx.org/vmosoti/bongatech-sms/v/unstable)](https://packagist.org/packages/vmosoti/bongatech-sms)
+[![Build Status](https://travis-ci.org/VMosoti/bongatech-sms.svg?branch=master)](https://travis-ci.org/VMosoti/bongatech-sms)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/598f97e6-bb46-4883-ae19-29820926b081/mini.png)](https://insight.sensiolabs.com/projects/598f97e6-bb46-4883-ae19-29820926b081)
-[![Total Downloads](https://img.shields.io/packagist/dt/vmosoti/bongatech-sms.svg?style=flat-square)](https://packagist.org/packages/vmosoti/bongatech-sms)
+[![Total Downloads](https://poser.pugx.org/vmosoti/bongatech-sms/downloads)](https://packagist.org/packages/vmosoti/bongatech-sms)
+[![License](https://poser.pugx.org/vmosoti/bongatech-sms/license)](https://packagist.org/packages/vmosoti/bongatech-sms)
 
 
 This is a PHP client library to be used with BongaTech's SMS API [See Bonga Tech's Website for more](http://bongatech.co.ke)

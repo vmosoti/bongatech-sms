@@ -1,9 +1,9 @@
 # BongaTech SMS
 
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/spatie/:package_name.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
-[![Build Status](https://img.shields.io/travis/spatie/:package_name/master.svg?style=flat-square)](https://travis-ci.org/spatie/:package_name)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/vmosoti/bongatech-sms.svg?style=flat-square)](https://packagist.org/packages/vmosoti/bongatech-sms)
+[![Build Status](https://img.shields.io/travis/vmosoti/bongatech-sms/master.svg?style=flat-square)](https://travis-ci.org/spatie/:package_name)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/xxxxxxxxx.svg?style=flat-square)](https://insight.sensiolabs.com/projects/xxxxxxxxx)
-[![Total Downloads](https://img.shields.io/packagist/dt/spatie/:package_name.svg?style=flat-square)](https://packagist.org/packages/spatie/:package_name)
+[![Total Downloads](https://img.shields.io/packagist/dt/vmosoti/bongatech-sms.svg?style=flat-square)](https://packagist.org/packages/vmosoti/bongatech-sms)
 
 
 This is a PHP client library to be used with BongaTech's SMS API [See Bonga Tech's Website for more](http://bongatech.co.ke)

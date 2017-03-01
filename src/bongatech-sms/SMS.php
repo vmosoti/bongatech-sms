@@ -9,11 +9,10 @@
 
 namespace VMosoti\BongaTech;
 
-use VMosoti\BongaTech\Exceptions\BatchTypeNotSetException;
+use VMosoti\BongaTech\Exceptions\BongaTechException;
 
 /**
  * Class SMS
- * @package VMosoti\BongaTech
  */
 class SMS
 {
@@ -22,7 +21,7 @@ class SMS
      *
      * @var string
      */
-    const VERSION = '1.0';
+    const VERSION = '1.0.0';
 
     /**
      * user ID registered in Bongatech.
@@ -80,7 +79,6 @@ class SMS
      */
     protected $callback_url;
 
-
     /**
      * recipient/recipients of the SMS being sent.
      * @var string/array.
@@ -95,7 +93,7 @@ class SMS
     protected $message;
 
     /**
-     * Bongatech end point
+     * Bongatech end point.
      *
      * @var string end point.
      */
@@ -103,6 +101,7 @@ class SMS
 
     /**
      * SMS constructor.
+     *
      * @param string $user_id
      * @param string $password
      * @param string $sender_id
@@ -114,24 +113,24 @@ class SMS
         $this->password = $password;
         $this->sender_id = $sender_id;
         $this->callback_url = $callback_url;
+        $this->setTimestamp();
+        $this->setToken();
     }
 
     /**
-     * set the token
-     */
-    private function setToken()
-    {
-
-        $this->token = md5($this->password);
-    }
-
-    /**
-     * set the timestamp
+     * set the timestamp.
      */
     private function setTimestamp()
     {
-
         $this->timestamp = date('YmdHis');
+    }
+
+    /**
+     * set the token.
+     */
+    private function setToken()
+    {
+        $this->token = md5($this->password);
     }
 
     /**
@@ -139,7 +138,7 @@ class SMS
      *
      * @return $this
      */
-    public function subscribable()
+    public function messageTypeSubscribable()
     {
         $this->message_type = MessageType::SUBSCIBABLE;
 
@@ -151,7 +150,7 @@ class SMS
      *
      * @return $this
      */
-    public function onDemand()
+    public function messageTypeOnDemand()
     {
         $this->message_type = MessageType::ON_DEMAND;
 
@@ -160,11 +159,11 @@ class SMS
 
     /**
      * invoke if SMS being sent is of type bulk SMS. This will be the common one.
+     *
      * @return $this
      */
-    public function bulk()
+    public function messageTypeBulk()
     {
-
         $this->message_type = MessageType::BULK;
 
         return $this;
@@ -175,7 +174,7 @@ class SMS
      *
      * @return $this
      */
-    public function noBatch()
+    public function batchTypeNoBatch()
     {
 
         $this->batch_type = BatchType::NOT_BATCH;
@@ -188,9 +187,8 @@ class SMS
      *
      * @return $this
      */
-    public function sameMessage()
+    public function batchTypeSameMessage()
     {
-
         $this->batch_type = BatchType::SAME_MESSAGE;
 
         return $this;
@@ -201,28 +199,35 @@ class SMS
      *
      * @return $this
      */
-    public function differentMessages()
+    public function batchTypeDifferentMessages()
     {
-
         $this->batch_type = BatchType::DIFFERENT_MESSAGE;
 
         return $this;
     }
 
     /**
-     *
+     * @param $recipients
+     * @param  $message
+     * @throws BongaTechException
      */
-    public function send()
+    public function send($recipients, $message)
     {
-        if ($this->batch_type == BatchType::NOT_BATCH) {
+        $this->recipients = $recipients;
+        $this->message = $message;
 
-        } elseif ($this->batch_type == BatchType::SAME_MESSAGE) {
 
-        } elseif ($this->batch_type == BatchType::DIFFERENT_MESSAGE) {
+        if ($this->batch_type === BatchType::NOT_BATCH) {
+
+            $this->sendForNoBatch();
+
+        } elseif ($this->batch_type === BatchType::SAME_MESSAGE) {
+
+        } elseif ($this->batch_type === BatchType::DIFFERENT_MESSAGE) {
 
         } else {
 
-            throw new BatchTypeNotSetException("Message Batch Type has not been set.");
+            throw new BongaTechException('Message Batch Type has not been set.');
         }
 
     }
@@ -230,23 +235,68 @@ class SMS
     /**
      * send a message to a single recipient.
      *
-     * @param Request $request
+     * @return string response
      */
-    private function sendForNoBatch(Request $request)
+    private function sendForNoBatch()
     {
+        $headers = array(
+            'Accept' => 'application/json'
+        );
+
+        $body = array(
+            'AuthDetails' => array(
+                array(
+                    'UserID' => $this->user_id,
+                    'Token' => $this->token,
+                    'Timestamp' => $this->timestamp
+
+                )
+            ),
+            'MessageType' => array(
+                (string)$this->message_type
+            ),
+            'BatchType' => array(
+                (string)$this->batch_type
+            ),
+            'SourceAddr' => array(
+                (string)$this->sender_id
+            ),
+            'MessagePayload' => array(
+                $this->message
+            ),
+            'DestinationAddr' => array(
+                array(
+                    'MSISDN' => $this->recipients,
+                    'LinkID' => ''
+                )
+            ),
+            'DeliveryRequest' => array(
+                array(
+                    'EndPoint' => $this->callback_url,
+                    'Correlator' => mt_rand()
+                )
+            )
+        );
+
+        $request = new Request($this->endpoint, $headers, $body);
+        $response = $request->send();
+
+        return $response;
     }
 
     /**
      * send same message to different recipients.
      *
      * @param Request $request
+     * @return request
      */
     private function sendForSameMessage(Request $request)
     {
+        return $request;
     }
 
     /**
-     * send different message to different recipients
+     * send different message to different recipients.
      *
      * @param Request $request
      */

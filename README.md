@@ -23,19 +23,16 @@ composer require vmosoti/bongatech-sms
 ## Usage
 
 ``` php
-$sms = new VMosoti\BongaTech\SMS();
-echo $sms->send('+254722123456', 'This is a Message');
+$sms = new \VMosoti\BongaTech\SMS();
+$response = $sms->messageTypeBulk()
+                                 ->batchTypeNoBatch()
+                                 ->send('0722123456', 'This is a Message');
+print_r($response) //the response object
 ```
 
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recently.
-
-## Testing
-
-``` bash
-$ composer test
-```
 
 ## Contributing
 

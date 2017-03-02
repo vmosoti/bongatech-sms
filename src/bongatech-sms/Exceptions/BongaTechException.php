@@ -8,8 +8,6 @@
  */
 
 namespace VMosoti\BongaTech\Exceptions;
-
-
-class BatchTypeNotSetException extends \Exception
+class BongaTechException extends \Exception
 {
 }

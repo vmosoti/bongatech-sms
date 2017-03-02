@@ -48,7 +48,7 @@ class Request
      * @param array $headers
      * @param array $body
      */
-    public function __construct($endpoint, array $headers, array $body)
+    public function __construct($endpoint, array $headers = null, array $body = null)
     {
         $this->endpoint = $endpoint;
         $this->headers = $headers;
@@ -57,7 +57,13 @@ class Request
 
     public function send()
     {
-        return UniRequest::post($this->endpoint, $this->headers, Body::Json($this->body));
+        return UniRequest::post($this->endpoint, null, Body::Json($this->body));
+    }
+
+    public function getBalance()
+    {
+
+        return UniRequest::get($this->endpoint);
     }
 
 

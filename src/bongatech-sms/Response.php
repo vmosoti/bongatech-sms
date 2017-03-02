@@ -10,7 +10,7 @@
 namespace VMosoti\BongaTech;
 
 /**
- * Class Response
+ * Class Response.
  */
 class Response
 {
@@ -23,6 +23,7 @@ class Response
 
     /**
      * Response constructor.
+     *
      * @param array response
      */
     public function __construct($response)
@@ -36,11 +37,8 @@ class Response
     public function getCode()
     {
         if (!empty($this->response->ResponseCode)) {
-
             return $this->response->ResponseCode;
         }
-
-        return null;
     }
 
     /**
@@ -49,11 +47,8 @@ class Response
     public function getBalance()
     {
         if (!empty($this->response->Balance)) {
-
             return $this->response->Balance;
         }
-
-        return null;
     }
 
     /**
@@ -62,11 +57,8 @@ class Response
     public function getDescription()
     {
         if (!empty($this->response->ResponseDescription)) {
-
             return $this->response->ResponseDescription;
         }
-
-        return null;
     }
 
     /**
@@ -75,11 +67,8 @@ class Response
     public function getMSISDN()
     {
         if (!empty($this->response->MSISDN)) {
-
             return $this->response->MSISDN;
         }
-
-        return null;
     }
 
 
@@ -91,7 +80,6 @@ class Response
         if (!empty($this->response->Correlator)) {
             return $this->response->Correlator;
         }
-        return null;
     }
 
     /**
@@ -100,11 +88,8 @@ class Response
     public function getMessageID()
     {
         if (!empty($this->response->MessageID)) {
-
             return $this->response->MessageID;
         }
-
-        return null;
     }
 
     /**
@@ -114,6 +99,4 @@ class Response
     {
         return $this->response['MessageID'];
     }
-
-
 }

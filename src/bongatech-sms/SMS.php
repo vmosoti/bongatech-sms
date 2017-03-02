@@ -12,7 +12,7 @@ namespace VMosoti\BongaTech;
 use VMosoti\BongaTech\Exceptions\BongaTechException;
 
 /**
- * Class SMS
+ * Class SMS.
  */
 class SMS
 {
@@ -148,7 +148,6 @@ class SMS
      */
     public function batchTypeNoBatch()
     {
-
         $this->batch_type = BatchType::NOT_BATCH;
 
         return $this;
@@ -181,32 +180,27 @@ class SMS
     /**
      * @param $recipients
      * @param  $message
+     *
      * @throws BongaTechException
-     * @return  string response
+     *
+     * @return string response
      */
     public function send($recipients, $message)
     {
         $this->recipients = $recipients;
         $this->message = $message;
-        $this->endpoint = $this->config['base_url'] . $this->config['sms_endpoint'];
+        $this->endpoint = $this->config['base_url'] .$this->config['sms_endpoint'];
         $response = '';
 
-
         if ($this->batch_type === BatchType::NOT_BATCH) {
-
             $response = $this->sendForNoBatch();
-
         } elseif ($this->batch_type === BatchType::SAME_MESSAGE) {
-
         } elseif ($this->batch_type === BatchType::DIFFERENT_MESSAGE) {
-
         } else {
-
             throw new BongaTechException('Message Batch Type has not been set.');
         }
 
         return $response;
-
     }
 
     /**
@@ -216,47 +210,47 @@ class SMS
      */
     private function sendForNoBatch()
     {
-        $headers = array(
+        $headers = [
             'Accept' => 'application/json'
-        );
+        ];
 
-        $body = array(
-            'AuthDetails' => array(
-                array(
+        $body = [
+            'AuthDetails' => [
+                [
                     'UserID' => $this->config['user_id'],
                     'Token' => $this->token,
                     'Timestamp' => $this->timestamp
 
-                )
-            ),
-            'MessageType' => array(
+                ]
+            ],
+            'MessageType' => [
                 (string)$this->message_type
-            ),
-            'BatchType' => array(
+            ],
+            'BatchType' => [
                 (string)$this->batch_type
-            ),
-            'SourceAddr' => array(
+            ],
+            'SourceAddr' => [
                 (string)$this->config['sender_id']
-            ),
-            'MessagePayload' => array(
-                array(
+            ],
+            'MessagePayload' => [
+                [
                     'Text' => $this->message
-                )
-            ),
-            'DestinationAddr' => array(
-                array(
+                ]
+            ],
+            'DestinationAddr' => [
+                [
                     'MSISDN' => $this->recipients,
                     'LinkID' => '',
                     'SourceID' => rand(2, 9)
-                )
-            ),
-            'DeliveryRequest' => array(
-                array(
+                ]
+            ],
+            'DeliveryRequest' => [
+                [
                     'EndPoint' => $this->config['callback_url'],
                     'Correlator' => mt_rand()
-                )
-            )
-        );
+                ]
+            ]
+        ];
 
         $request = new Request($this->endpoint, $headers, $body);
         $response = $request->send();
@@ -287,16 +281,13 @@ class SMS
 
     public static function getBalance()
     {
-
         $config = Config::get();
 
-        $endpoint = $config['base_url'] . $config['balance_endpoint'] . '?UserID=' . $config['user_id'] . '&Token=' . md5($config['password']);
+        $endpoint = $config['base_url'].$config['balance_endpoint'].'?UserID='.$config['user_id'].'&Token='.md5($config['password']);
 
         $request = new Request($endpoint);
         $response = $request->getBalance();
 
         return new Response($response->body);
     }
-
-
 }

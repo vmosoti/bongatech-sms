@@ -8,6 +8,8 @@
  */
 
 namespace VMosoti\BongaTech\Exceptions;
+
 class BongaTechException extends \Exception
 {
+
 }

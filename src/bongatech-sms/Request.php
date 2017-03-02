@@ -9,8 +9,8 @@
 
 namespace VMosoti\BongaTech;
 
-use Unirest\Request\Body;
 use Unirest\Request as UniRequest;
+use Unirest\Request\Body;
 
 class Request
 {
@@ -62,9 +62,6 @@ class Request
 
     public function getBalance()
     {
-
         return UniRequest::get($this->endpoint);
     }
-
-
 }

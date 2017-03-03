@@ -22,10 +22,10 @@
   "require-dev": {},
   "autoload": {
     "files": [
-      "src/bongatech-sms/helpers.php"
+      "src/helpers.php"
     ],
     "psr-4": {
-      "VMosoti\\BongaTech\\": "src/bongatech-sms"
+      "VMosoti\\BongaTech\\": "src"
     }
   }
 }

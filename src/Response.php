@@ -36,9 +36,7 @@ class Response
      */
     public function getCode()
     {
-        if (!empty($this->response->ResponseCode)) {
-            return $this->response->ResponseCode;
-        }
+        return (!empty($this->response->ResponseCode) ? $this->response->ResponseCode : '');
     }
 
     /**
@@ -46,9 +44,7 @@ class Response
      */
     public function getBalance()
     {
-        if (!empty($this->response->Balance)) {
-            return $this->response->Balance;
-        }
+        return (!empty($this->response->Balance ? $this->response->Balance : ''));
     }
 
     /**
@@ -56,9 +52,7 @@ class Response
      */
     public function getDescription()
     {
-        if (!empty($this->response->ResponseDescription)) {
-            return $this->response->ResponseDescription;
-        }
+        return (!empty($this->response->ResponseDescription) ? $this->response->ResponseDescription : '');
     }
 
     /**
@@ -66,9 +60,7 @@ class Response
      */
     public function getMSISDN()
     {
-        if (!empty($this->response->MSISDN)) {
-            return $this->response->MSISDN;
-        }
+        return (!empty($this->response->MSISDN) ? $this->response->MSISDN : '');
     }
 
 
@@ -77,9 +69,7 @@ class Response
      */
     public function getCorrelator()
     {
-        if (!empty($this->response->Correlator)) {
-            return $this->response->Correlator;
-        }
+        return (!empty($this->response->Correlator) ? $this->response->Correlator : '');
     }
 
     /**
@@ -87,9 +77,7 @@ class Response
      */
     public function getMessageID()
     {
-        if (!empty($this->response->MessageID)) {
-            return $this->response->MessageID;
-        }
+        return (!empty($this->response->MessageID) ? $this->response->MessageID : '');
     }
 
     /**
@@ -97,6 +85,6 @@ class Response
      */
     public function getSourceID()
     {
-        return $this->response['MessageID'];
+        return (!empty($this->response->SourceID) ? $this->response->SourceID : '');
     }
 }

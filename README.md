@@ -22,10 +22,134 @@ composer require vmosoti/bongatech-sms
 
 ## Usage
 
+### Providing variables
+
+The Config class requires to fetch some variable from the system environment. These variables are the ones used in initialization of the SMS class.
+
+Each of these two variables consist of an array of arrays
+
+### Initializing the SMS class
+
+To initialize:
 ``` php
-$sms = new \VMosoti\BongaTech\SMS();
-$response = $sms->messageTypeBulk()->batchTypeNoBatch()->send('0722123456', 'This is a Message');
-print_r($response) //the response object
+$sms = new  \VMosoti\BongaTech\SMS();
+
+```
+or simply use the magic helper function:
+
+```php
+sms()  // you have the SMS object
+```
+### Recipients and Messages
+Each of them is an array of arrays.
+i.e
+```php
+$recipients = array(
+        array(
+            'MSISDN' => '0722123456',
+            'LinkID' => '',
+            'SourceID' => 'your source id here'
+        ),
+        array(
+            'MSISDN' => '0775345678',
+            'LinkID' => '',
+            'SourceID' => 'source id for this here'
+        )
+    );
+```
+and messages
+
+```php
+$messages = array(
+        array(
+            'Text' => 'Message 1 goes here'
+        ),
+        array(
+            'Text' => 'Message 2 goes here'
+        )
+    );
+```
+### Sending for single sms
+```php
+$message = array(
+        array(
+            'Text' => 'This message is for a single recipient'
+        )
+    );
+    
+$recipient = array(
+        array(
+            'MSISDN' => '0722123456',
+            'LinkID' => '',
+            'SourceID' => 'your source id here'
+        )
+    );
+    
+$response = $sms->messageTypeBulk()->batchTypeNoBatch()->send($recipient, $message);
+```
+or use helper function
+
+```php
+$response = sms()->messageTypeBulk()->batchTypeNoBatch()->send($recipient, $message);
+```
+### Sending 1 sms to many recipients
+```php
+$message = array(
+        array(
+            'Text' => 'This message goes to many recipients'
+        )
+    );
+    
+$recipients = array(
+        array(
+            'MSISDN' => '0722123456',
+            'LinkID' => '',
+            'SourceID' => 'source id for recipient 1'
+        ),
+        array(
+            'MSISDN' => '0713678900',
+            'LinkID' => '',
+            'SourceID' => 'source id for recipient 2'
+            ),
+    );
+    
+$response = $sms->messageTypeBulk()->batchTypeSameMessage()->send($recipients, $message);
+```
+### Sending different message for each recipient
+```php
+$messages = array(
+        array(
+            'Text' => 'This is message for recipient 1'
+        ),
+        array(
+             'Text' => 'This is message for recipient 2'
+        )
+    );
+    
+$recipients = array(
+        array(
+            'MSISDN' => '0722123456',
+            'LinkID' => '',
+            'SourceID' => 'source id for recipient 1'
+        ),
+        array(
+            'MSISDN' => '0713678900',
+            'LinkID' => '',
+            'SourceID' => 'source id for recipient 2'
+            ),
+    );
+    
+$response = $sms->messageTypeBulk()->batchTypeDifferentMessages()->send($recipients, $messages);
+```
+### Querying SMS units balance
+
+```php
+$balance = SMS::getBalance();
+```
+or just throw in the helper function
+
+```php
+get_balance();
 ```
 
 ## Changelog
@@ -34,7 +158,7 @@ Please see [CHANGELOG](CHANGELOG.md) for more information what has changed recen
 
 ## Contributing
 
-Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+Suggestions, pull requests , bug reporting and code improvements are all welcome. Feel free to get in touch.
 
 ## Security
 

@@ -45,19 +45,20 @@ class Request
      * Request constructor.
      *
      * @param  $endpoint
-     * @param array $headers
      * @param array $body
      */
-    public function __construct($endpoint, array $headers = null, array $body = null)
+    public function __construct($endpoint, array $body = null)
     {
         $this->endpoint = $endpoint;
-        $this->headers = $headers;
         $this->body = $body;
+        $this->headers = $headers = [
+            'Accept' => 'application/json'
+        ];
     }
 
-    public function send()
+    public function sendSMS()
     {
-        return UniRequest::post($this->endpoint, null, Body::Json($this->body));
+        return UniRequest::post($this->endpoint, $this->headers, Body::Json($this->body));
     }
 
     public function getBalance()

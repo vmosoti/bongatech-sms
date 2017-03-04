@@ -79,8 +79,6 @@ class Response
         }
 
         return $correlator;
-
-
     }
 
     /**

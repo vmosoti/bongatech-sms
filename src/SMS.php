@@ -251,7 +251,7 @@ class SMS
                 [
                     'UserID'    => $this->config['user_id'],
                     'Token'     => $this->token,
-                    'Timestamp' => $this->timestamp
+                    'Timestamp' => $this->timestamp,
 
                 ],
             ],

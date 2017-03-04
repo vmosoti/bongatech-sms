@@ -13,7 +13,7 @@ class Config
 {
     public static function get()
     {
-        return collect([
+        return array(
             'user_id'          => env('BONGATECH_USER_ID'),
             'password'         => env('BONGATECH_PASSWORD'),
             'sender_id'        => env('BONGATECH_SENDER_ID'),
@@ -21,6 +21,6 @@ class Config
             'base_url'         => env('BONGATECH_BASE_URL'),
             'sms_endpoint'     => env('BONGATECH_SEND_SMS_END_POINT'),
             'balance_endpoint' => env('BONGATECH_GET_BALANCE_END_POINT'),
-        ]);
+        );
     }
 }

@@ -25,7 +25,7 @@ class Request
      *
      * @var array
      */
-    public $headers;
+    public $headers = null;
 
     /**
      * request body.
@@ -52,7 +52,7 @@ class Request
         $this->endpoint = $endpoint;
         $this->body = $body;
         $this->headers = $headers = [
-            'Accept' => 'application/json'
+            'Accept' => 'application/json',
         ];
     }
 

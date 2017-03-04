@@ -42,7 +42,7 @@ class SMS
      *
      * @var int message
      */
-    protected $message_type;
+    protected $message_type = 0;
 
     /**
      * batch type of the SMS being sent.
@@ -187,9 +187,13 @@ class SMS
      */
     public function send($recipients, $message)
     {
+        if ($this->message_type < 1) {
+            throw new BongaTechException('The Message Type has not been set.');
+        }
+
         $this->recipients = $recipients;
         $this->message = $message;
-        $this->endpoint = $this->config['base_url'] . $this->config['sms_endpoint'];
+        $this->endpoint = $this->config['base_url'].$this->config['sms_endpoint'];
 
         if ($this->batch_type === BatchType::NOT_BATCH) {
 
@@ -200,10 +204,8 @@ class SMS
                     $response = $this->sendForNonBatch($this->buildSendObject($this->recipients, $this->message));
 
                 } else {
-
                     throw new BongaTechException('The recipient MUST be an array of depth 2 and count should not be more than 1');
                 }
-
             } else {
 
                 throw new BongaTechException('Message should be provided as an array whose depth is 2 and count should equal 1');
@@ -259,7 +261,6 @@ class SMS
         }
 
         return $response;
-
     }
 
     /**
@@ -272,7 +273,6 @@ class SMS
      */
     private function buildSendObject($recipients, $messages)
     {
-
         $body = [
             'AuthDetails' => [
                 [
@@ -280,30 +280,28 @@ class SMS
                     'Token' => $this->token,
                     'Timestamp' => $this->timestamp
 
-                ]
+                ],
             ],
             'MessageType' => [
-                (string)$this->message_type
+                (string)$this->message_type,
             ],
             'BatchType' => [
-                (string)$this->batch_type
+                (string)$this->batch_type,
             ],
             'SourceAddr' => [
-                (string)$this->config['sender_id']
+                (string)$this->config['sender_id'],
             ],
-            'MessagePayload' => $messages,
+            'MessagePayload'  => $messages,
             'DestinationAddr' => $recipients,
             'DeliveryRequest' => [
                 [
-                    'EndPoint' => $this->config['callback_url'],
-                    'Correlator' => mt_rand()
+                    'EndPoint'   => $this->config['callback_url'],
+                    'Correlator' => mt_rand(),
                 ]
             ]
         ];
 
         return $body;
-
-
     }
 
     /**
@@ -315,12 +313,10 @@ class SMS
      */
     private function sendForNonBatch($body)
     {
-
         $request = new Request($this->endpoint, $body);
         $response = $request->sendSMS();
 
         return new Response($response->body[0]);
-
     }
 
     /**
@@ -328,34 +324,30 @@ class SMS
      *
      * @param $body
      *
-     * @return Response
+     * @return array
      */
     private function sendForBatch($body)
     {
-
         $request = new Request($this->endpoint, $body);
         $response = $request->sendSMS();
 
-        //return $response->body;
+        $responses = array();
+        $response_count = count($response->body);
 
-        $responses = [];
-
-        for ($i = 0; $i < count($response->body); $i++) {
+        for ($i = 0; $i < $response_count; $i++) {
 
             $res = new Response($response->body[$i]);
-            $responses = $res;
+            $responses[] = $res;
 
         }
-
         return $responses;
-
     }
 
     public static function getBalance()
     {
         $config = Config::get();
 
-        $endpoint = $config['base_url'] . $config['balance_endpoint'] . '?UserID=' . $config['user_id'] . '&Token=' . md5($config['password']);
+        $endpoint = $config['base_url'].$config['balance_endpoint'].'?UserID='.$config['user_id'].'&Token='.md5($config['password']);
 
         $request = new Request($endpoint);
         $response = $request->getBalance();

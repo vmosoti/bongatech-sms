@@ -36,7 +36,7 @@ class Response
      */
     public function getCode()
     {
-        return (!empty($this->response->ResponseCode) ? $this->response->ResponseCode : '');
+        return !empty($this->response->ResponseCode) ? $this->response->ResponseCode : '';
     }
 
     /**
@@ -44,7 +44,7 @@ class Response
      */
     public function getBalance()
     {
-        return (!empty($this->response->Balance ? $this->response->Balance : ''));
+        return !empty($this->response->Balance ? $this->response->Balance : '');
     }
 
     /**
@@ -52,7 +52,7 @@ class Response
      */
     public function getDescription()
     {
-        return (!empty($this->response->ResponseDescription) ? $this->response->ResponseDescription : '');
+        return !empty($this->response->ResponseDescription) ? $this->response->ResponseDescription : '';
     }
 
     /**
@@ -60,24 +60,52 @@ class Response
      */
     public function getMSISDN()
     {
-        return (!empty($this->response->MSISDN) ? $this->response->MSISDN : '');
+        return !empty($this->response->MSISDN) ? $this->response->MSISDN : '';
     }
 
 
     /**
+     * there are some inconsistencies in the names of objects returned.
+     *
      * @return mixed
      */
     public function getCorrelator()
     {
-        return (!empty($this->response->Correlator) ? $this->response->Correlator : '');
+        $correlator = '';
+
+        if (!empty($this->response->Correlator)) {
+
+            $correlator = $this->response->Correlator;
+
+        } elseif (!empty($this->response->correlator)) {
+
+            $correlator = $this->response->correlator;
+
+        }
+        return $correlator;
+
+
     }
 
     /**
+     * there are some inconsistencies in the names of objects returned.
+     *
      * @return mixed
      */
     public function getMessageID()
     {
-        return (!empty($this->response->MessageID) ? $this->response->MessageID : '');
+        $msgid = '';
+
+        if (!empty($this->response->MessageID)) {
+
+            $msgid = $this->response->MessageID;
+
+        } elseif (!empty($this->response->msg_id)) {
+
+            $msgid = $this->response->msg_id;
+
+        }
+        return $msgid;
     }
 
     /**
@@ -85,6 +113,16 @@ class Response
      */
     public function getSourceID()
     {
-        return (!empty($this->response->SourceID) ? $this->response->SourceID : '');
+        return !empty($this->response->source_id) ? $this->response->source_id : '';
     }
+
+    /**
+     * @return mixed
+     */
+    public function getReport()
+    {
+        return !empty($this->response->dlr_report) ? $this->response->dlr_report : '';
+    }
+
+
 }

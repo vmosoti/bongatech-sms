@@ -7,8 +7,16 @@
  * @license https://github.com/VMosoti/bongatech-sms/blob/master/LICENSE
  */
 
-namespace VMosoti\BongaTech\Exceptions;
+namespace VMosoti\BongaTech\Tests;
 
-class BongaTechException extends \Exception
+use PHPUnit\Framework\TestCase;
+
+class ExampleTest extends TestCase
 {
+    /** @test */
+    public function true_is_true()
+    {
+        $this->assertTrue(true);
+    }
+
 }

@@ -24,9 +24,16 @@ composer require vmosoti/bongatech-sms
 
 ### Providing variables
 
-The Config class requires to fetch some variable from the system environment. These variables are the ones used in initialization of the SMS class.
+The Config class requires to fetch some variable from the system environment. 
+These variables are the ones used in initialization of the SMS class.
+In your .env file:
 
-Each of these two variables consist of an array of arrays
+```
+BONGATECH_USER_ID=
+BONGATECH_PASSWORD=
+BONGATECH_SENDER_ID=
+BONGATECH_CALL_BACK_URL=
+```
 
 ### Initializing the SMS class
 
@@ -69,7 +76,7 @@ $messages = array(
         )
     );
 ```
-### Sending for single sms
+### Sending for single recipient
 ```php
 $message = array(
         array(
@@ -92,6 +99,8 @@ or use helper function
 ```php
 $response = sms()->messageTypeBulk()->batchTypeNoBatch()->send($recipient, $message);
 ```
+The above returns a single [Response](https://github.com/VMosoti/bongatech-sms/blob/master/src/Response.php) object
+
 ### Sending 1 sms to many recipients
 ```php
 $message = array(
@@ -113,7 +122,7 @@ $recipients = array(
             ),
     );
     
-$response = $sms->messageTypeBulk()->batchTypeSameMessage()->send($recipients, $message);
+$responses = $sms->messageTypeBulk()->batchTypeSameMessage()->send($recipients, $message);
 ```
 ### Sending different message for each recipient
 ```php
@@ -139,18 +148,53 @@ $recipients = array(
             ),
     );
     
-$response = $sms->messageTypeBulk()->batchTypeDifferentMessages()->send($recipients, $messages);
+$responses = $sms->messageTypeBulk()->batchTypeDifferentMessages()->send($recipients, $messages);
 ```
+The above two examples returns an array of the [Response](https://github.com/VMosoti/bongatech-sms/blob/master/src/Response.php) object.
+Thus:
+```php
+foreach($responses as $response){
+$response->getCode();
+------
+}
+```
+
 ### Querying SMS units balance
 
 ```php
-$balance = SMS::getBalance();
+$response = SMS::getBalance();
 ```
 or just throw in the helper function
 
 ```php
 get_balance();
 ```
+`$response` is [Response](https://github.com/VMosoti/bongatech-sms/blob/master/src/Response.php) object. thus 
+
+```php
+$response->getBalance()
+```
+
+## Delivery Reports
+
+In your callback,
+```php
+$response = \VMosoti\BongaTech\DeliveryReport::get();
+````
+It returns [Response](https://github.com/VMosoti/bongatech-sms/blob/master/src/Response.php) object,
+
+thus:
+
+```
+$response->getReport();
+$response->getMessageID();
+$response->getCorrelator();
+$response->getSourceID();
+```
+See all possible reports [here](DELIVERYREPORTS.md)
+## Exceptions
+
+catch `\VMosoti\BongaTech\Exceptions\BongaTechException;`
 
 ## Changelog
 

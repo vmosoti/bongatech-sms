@@ -2,7 +2,6 @@
 
 [![Latest Stable Version](https://poser.pugx.org/vmosoti/bongatech-sms/v/stable)](https://packagist.org/packages/vmosoti/bongatech-sms)
 [![Latest Unstable Version](https://poser.pugx.org/vmosoti/bongatech-sms/v/unstable)](https://packagist.org/packages/vmosoti/bongatech-sms)
-[![Build Status](https://travis-ci.org/VMosoti/bongatech-sms.svg?branch=master)](https://travis-ci.org/VMosoti/bongatech-sms)
 [![StyleCI](https://styleci.io/repos/83431204/shield?branch=master)](https://styleci.io/repos/83431204)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/VMosoti/bongatech-sms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/VMosoti/bongatech-sms/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/598f97e6-bb46-4883-ae19-29820926b081/mini.png)](https://insight.sensiolabs.com/projects/598f97e6-bb46-4883-ae19-29820926b081)

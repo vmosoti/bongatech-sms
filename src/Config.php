@@ -11,7 +11,6 @@ namespace VMosoti\BongaTech;
 
 class Config
 {
-
     public static function get()
     {
         return collect([

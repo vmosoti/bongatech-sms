@@ -19,7 +19,5 @@ class DeliveryReport
         $report = json_decode(file_get_contents('php://input'));
 
         return new Response($report[0]);
-
     }
-
 }

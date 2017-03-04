@@ -196,67 +196,40 @@ class SMS
         $this->endpoint = $this->config['base_url'].$this->config['sms_endpoint'];
 
         if ($this->batch_type === BatchType::NOT_BATCH) {
-
             if (is_array($this->message) && array_depth($this->message) == 2 && count($this->message) == 1) {
-
                 if (is_array($this->recipients) && array_depth($this->recipients) == 2 && count($this->recipients) == 1) {
-
                     $response = $this->sendForNonBatch($this->buildSendObject($this->recipients, $this->message));
-
                 } else {
                     throw new BongaTechException('The recipient MUST be an array of depth 2 and count should not be more than 1');
                 }
             } else {
-
                 throw new BongaTechException('Message should be provided as an array whose depth is 2 and count should equal 1');
             }
-
-
         } elseif ($this->batch_type === BatchType::SAME_MESSAGE) {
-
             if (is_array($this->message) && array_depth($this->message) == 2 && count($this->message) == 1) {
-
                 if (is_array($this->recipients) && array_depth($this->recipients) == 2 && count($this->recipients) > 1) {
-
                     $response = $this->sendForBatch($this->buildSendObject($this->recipients, $this->message));
-
                 } else {
-
                     throw new BongaTechException('The recipients MUST be an array of depth 2 and count should be more than 1');
                 }
-
-
             } else {
-
                 throw new BongaTechException('Message should be provided as an array whose depth and count should equal 1');
             }
-
         } elseif ($this->batch_type === BatchType::DIFFERENT_MESSAGE) {
-
             if (count($this->recipients) == count($this->message)) {
-
                 if (is_array($this->message) && array_depth($this->message) == 2) {
-
                     if (is_array($this->recipients) && array_depth($this->recipients) == 2) {
-
                         $response = $this->sendForBatch($this->buildSendObject($this->recipients, $this->message));
-
                     } else {
-
                         throw new BongaTechException('The recipients MUST be an array of depth 2');
                     }
-
                 } else {
-
                     throw new BongaTechException('Message MUST be an array of depth 2');
                 }
             } else {
-
                 throw new BongaTechException('No. of Messages MUST be equal to number of Recipients.');
             }
-
         } else {
-
             throw new BongaTechException('Message Batch Type has not been set.');
         }
 
@@ -276,20 +249,20 @@ class SMS
         $body = [
             'AuthDetails' => [
                 [
-                    'UserID' => $this->config['user_id'],
-                    'Token' => $this->token,
+                    'UserID'    => $this->config['user_id'],
+                    'Token'     => $this->token,
                     'Timestamp' => $this->timestamp
 
                 ],
             ],
             'MessageType' => [
-                (string)$this->message_type,
+                (string) $this->message_type,
             ],
             'BatchType' => [
-                (string)$this->batch_type,
+                (string) $this->batch_type,
             ],
             'SourceAddr' => [
-                (string)$this->config['sender_id'],
+                (string) $this->config['sender_id'],
             ],
             'MessagePayload'  => $messages,
             'DestinationAddr' => $recipients,
@@ -297,8 +270,8 @@ class SMS
                 [
                     'EndPoint'   => $this->config['callback_url'],
                     'Correlator' => mt_rand(),
-                ]
-            ]
+                ],
+            ],
         ];
 
         return $body;
@@ -331,15 +304,14 @@ class SMS
         $request = new Request($this->endpoint, $body);
         $response = $request->sendSMS();
 
-        $responses = array();
+        $responses = [];
         $response_count = count($response->body);
 
         for ($i = 0; $i < $response_count; $i++) {
-
             $res = new Response($response->body[$i]);
             $responses[] = $res;
-
         }
+
         return $responses;
     }
 

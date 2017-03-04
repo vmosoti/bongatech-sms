@@ -63,7 +63,6 @@ class Response
         return !empty($this->response->MSISDN) ? $this->response->MSISDN : '';
     }
 
-
     /**
      * there are some inconsistencies in the names of objects returned.
      *
@@ -74,14 +73,11 @@ class Response
         $correlator = '';
 
         if (!empty($this->response->Correlator)) {
-
             $correlator = $this->response->Correlator;
-
         } elseif (!empty($this->response->correlator)) {
-
             $correlator = $this->response->correlator;
-
         }
+
         return $correlator;
 
 
@@ -97,14 +93,11 @@ class Response
         $msgid = '';
 
         if (!empty($this->response->MessageID)) {
-
             $msgid = $this->response->MessageID;
-
         } elseif (!empty($this->response->msg_id)) {
-
             $msgid = $this->response->msg_id;
-
         }
+
         return $msgid;
     }
 
@@ -123,6 +116,4 @@ class Response
     {
         return !empty($this->response->dlr_report) ? $this->response->dlr_report : '';
     }
-
-
 }

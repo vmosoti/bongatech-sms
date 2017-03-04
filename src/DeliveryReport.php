@@ -20,4 +20,4 @@ class DeliveryReport
 
         return new Response($report[0]);
     }
- }
+}

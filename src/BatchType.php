@@ -11,7 +11,6 @@ namespace VMosoti\BongaTech;
 
 class BatchType
 {
-    const   NOT_BATCH = 0;
-    const   SAME_MESSAGE = 1;
-    const   DIFFERENT_MESSAGE = 2;
+    const   NOT_BATCH = 0; // to a single recipient
+    const   BATCH = 1; // one message to many recipients or each recipient receives own messages
 }

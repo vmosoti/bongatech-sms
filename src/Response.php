@@ -19,7 +19,7 @@ class Response
      *
      * @var array
      */
-    protected $response;
+    public $response;
 
     /**
      * Response constructor.
@@ -114,4 +114,13 @@ class Response
     {
         return !empty($this->response->dlr_report) ? $this->response->dlr_report : '';
     }
+
+    /**
+     * @return boolean
+     */
+    public function isSuccess()
+    {
+        return $this->getCode()=='1001';
+    }
+
 }

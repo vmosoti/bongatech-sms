@@ -18,9 +18,6 @@ class Config
             'password'         => env('BONGATECH_PASSWORD'),
             'sender_id'        => env('BONGATECH_SENDER_ID'),
             'callback_url'     => env('BONGATECH_CALL_BACK_URL'),
-            'base_url'         => env('BONGATECH_BASE_URL'),
-            'sms_endpoint'     => env('BONGATECH_SEND_SMS_END_POINT'),
-            'balance_endpoint' => env('BONGATECH_GET_BALANCE_END_POINT'),
         ];
     }
 }

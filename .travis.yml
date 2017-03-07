@@ -5,18 +5,11 @@ php:
   - 7.0
   - hhvm
 
-sudo: false
-
 before_script:
-  - travis_retry composer self-update
-  - travis_retry composer update ${COMPOSER_FLAGS} --no-interaction --prefer-dist
+  - composer self-update
+  - composer install --prefer-source --no-interaction --dev
 
-matrix:
-  exclude:
-    - php: hhvm
-  allow_failures:
-    - php: 7.0
-    - php: hhvm
+script: phpunit
 
 notifications:
   slack: becrafted:x1zECN0tTUYPbeOeXMZ4cw5t

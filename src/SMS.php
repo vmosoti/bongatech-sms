@@ -106,12 +106,13 @@ class SMS
     public function __construct()
     {
         $this->config = Config::get();
-        $this->setTimestamp();
-        $this->setToken();
 
-        if(!isset($this->config['user_id']) && !isset($this->config['password']) && !isset($this->config['sender_id'])){
+        if (empty($this->config['user_id']) || empty($this->config['password']) || empty($this->config['sender_id'])){
             throw new BongaTechException('Please ensure that all configuration variables have been set.');
         }
+
+        $this->setTimestamp();
+        $this->setToken();
     }
 
     /**

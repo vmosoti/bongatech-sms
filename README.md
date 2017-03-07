@@ -3,6 +3,7 @@
 [![Latest Stable Version](https://poser.pugx.org/vmosoti/bongatech-sms/v/stable)](https://packagist.org/packages/vmosoti/bongatech-sms)
 [![Latest Unstable Version](https://poser.pugx.org/vmosoti/bongatech-sms/v/unstable)](https://packagist.org/packages/vmosoti/bongatech-sms)
 [![StyleCI](https://styleci.io/repos/83431204/shield?branch=master)](https://styleci.io/repos/83431204)
+[![Build Status](https://travis-ci.org/vmosoti/bongatech-sms.svg?branch=master)](https://travis-ci.org/vmosoti/bongatech-sms)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/VMosoti/bongatech-sms/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/VMosoti/bongatech-sms/?branch=master)
 [![SensioLabsInsight](https://insight.sensiolabs.com/projects/598f97e6-bb46-4883-ae19-29820926b081/mini.png)](https://insight.sensiolabs.com/projects/598f97e6-bb46-4883-ae19-29820926b081)
 [![Total Downloads](https://poser.pugx.org/vmosoti/bongatech-sms/downloads)](https://packagist.org/packages/vmosoti/bongatech-sms)
@@ -75,7 +76,7 @@ $messages = array(
         )
     );
 ```
-### Sending for single recipient
+### Sending to a single Recipient
 ```php
 $message = array(
         array(
@@ -91,16 +92,16 @@ $recipient = array(
         )
     );
     
-$response = $sms->messageTypeBulk()->batchTypeNoBatch()->send($recipient, $message);
+$response = $sms->bulk()->toOne()->send($recipient, $message);
 ```
 or use helper function
 
 ```php
-$response = sms()->messageTypeBulk()->batchTypeNoBatch()->send($recipient, $message);
+$response = sms()->bulk()->toOne()->send($recipient, $message);
 ```
 The above returns a single [Response](https://github.com/VMosoti/bongatech-sms/blob/master/src/Response.php) object
 
-### Sending 1 sms to many recipients
+### Sending same sms to many recipients
 ```php
 $message = array(
         array(
@@ -121,9 +122,9 @@ $recipients = array(
             ),
     );
     
-$responses = $sms->messageTypeBulk()->batchTypeSameMessage()->send($recipients, $message);
+$responses = $sms->bulk()->toMany()->send($recipients, $message);
 ```
-### Sending different message for each recipient
+### Sending different sms to each recipient
 ```php
 $messages = array(
         array(
@@ -147,7 +148,7 @@ $recipients = array(
             ),
     );
     
-$responses = $sms->messageTypeBulk()->batchTypeDifferentMessages()->send($recipients, $messages);
+$responses = $sms->bulk()->toMany()->send($recipients, $messages);
 ```
 The above two examples returns an array of the [Response](https://github.com/VMosoti/bongatech-sms/blob/master/src/Response.php) object.
 Thus:
@@ -205,7 +206,7 @@ Suggestions, pull requests , bug reporting and code improvements are all welcome
 
 ## Security
 
-If you discover any security related issues, please email vincent@vmosoti.com instead of using the issue tracker.
+If you discover any security related issues, please email vincent@vmosoti.com.
 
 ## Credits
 

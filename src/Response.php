@@ -116,11 +116,11 @@ class Response
     }
 
     /**
-     * @return boolean
+     * @return bool
      */
     public function isSuccess()
     {
-        return $this->getCode()=='1001';
+        return $this->getCode() == '1001';
     }
 
 }

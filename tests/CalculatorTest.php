@@ -3,6 +3,7 @@
 namespace VMosoti\BongaTech\Tests;
 
 use PHPUnit\Framework\TestCase;
+
 class CalculatorTest extends TestCase
 {
     public function testTrueIsTrue()
@@ -10,5 +11,4 @@ class CalculatorTest extends TestCase
         $foo = true;
         $this->assertTrue($foo);
     }
-
 }

@@ -122,5 +122,4 @@ class Response
     {
         return $this->getCode() == '1001';
     }
-
 }

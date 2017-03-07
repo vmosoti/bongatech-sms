@@ -111,7 +111,7 @@ class SMS
             empty($this->config['user_id']) ||
             empty($this->config['password']) ||
             empty($this->config['sender_id'])
-        ){
+        ) {
             throw new BongaTechException('Please ensure that all configuration variables have been set.');
         }
 

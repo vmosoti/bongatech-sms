@@ -44,7 +44,7 @@ class Response
      */
     public function getBalance()
     {
-        return !empty($this->response->Balance ? $this->response->Balance : '');
+        return !empty($this->response->Balance) ? $this->response->Balance : '';
     }
 
     /**
